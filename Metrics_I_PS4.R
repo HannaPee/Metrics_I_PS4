@@ -169,6 +169,48 @@ etable(model_3, tex = TRUE,
        file = "regression_3.tex")
 
 
+### d ###
+
+model_5 <- feols(
+  y ~ D5 + D6 + D7 + D8 + i(i, t) | i + t,
+  data = df_panel,
+  vcov = ~ i
+)
+
+etable(
+  model_5,
+  tex  = TRUE,
+  title = "Model 5 results",
+  label = "tab:main_results",
+  file = "regression_5.tex",
+  keep = "^D[5-8]$",
+  drop = ":t" 
+)
+
+### e ####
+
+# Estimate model 4 # 
+
+model_4 <- feols(
+  y ~ D_post + i(i, t) | i + t,
+  data = df_panel,
+  vcov = ~ i
+)
+
+etable(
+  model_4,
+  tex  = TRUE,
+  title = "Model 4 results",
+  label = "tab:main_results",
+  file = "regression_4.2.tex",
+  keep = c("^D_post$", "^D[0-9]"),
+  drop = ":t", 
+  extralines = list(
+    "Municipality-specific linear trends" = "Yes"
+  )
+)
+
+
 
 
 
